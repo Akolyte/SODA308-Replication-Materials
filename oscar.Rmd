@@ -1,0 +1,169 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+oscardata <- read.csv(file = 'results.csv')
+oscardata$oscar_win <- round(oscardata$oscar_win,4)
+oscardata$sentiment_score <-round(oscardata$sentiment_score,4)
+oscardata
+```
+
+```{r}
+library(ggplot2)
+
+actor.data <- oscardata[1:5,]
+
+supporting_actor.data <- oscardata[6:10,]
+
+actress.data <- oscardata[11:15,]
+
+supporting_actress.data <- oscardata[16:20,]
+
+movie.data <- oscardata[21:28,]
+```
+
+
+
+```{r}
+ggplot(actor.data, aes(x = name, y=oscar_win)) +
+  geom_bar(stat="identity", color = "purple", fill = "pink", show.values=TRUE) +
+  geom_text(aes(label=oscar_win), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0.6,1))+
+  labs( title = "Best Actor Winning Probability.",
+        x="Name",
+        y="Probability of Oscar Win",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+```{r}
+ggplot(actor.data, aes(x = name, y = sentiment_score)) +
+  geom_bar(stat="identity", color = "purple", fill = "pink") +
+  geom_text(aes(label=sentiment_score), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0,0.5))+
+  labs( title = "Best Actor Sentiment Score",
+        x="Name",
+        y="Sentiment Score",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+```{r}
+ggplot(supporting_actor.data, aes(x = name, y=oscar_win)) +
+  geom_bar(stat="identity", color = "purple", fill = "blue", show.values=TRUE) +
+  geom_text(aes(label=oscar_win), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0.7,1))+
+  labs( title = "Best Supporting Actor Winning Probability.",
+        x="Name",
+        y="Probability of Oscar Win",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+```{r}
+ggplot(supporting_actor.data, aes(x = name, y = sentiment_score)) +
+  geom_bar(stat="identity", color = "purple", fill = "blue") +
+  geom_text(aes(label=sentiment_score), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0,0.5))+
+  labs( title = "Best Supporting Actor Sentiment Score",
+        x="Name",
+        y="Sentiment Score",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+
+
+
+```{r}
+ggplot(actress.data, aes(x = name, y=oscar_win)) +
+  geom_bar(stat="identity", color = "purple", fill = "yellow", show.values=TRUE) +
+  geom_text(aes(label=oscar_win), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0.6,1))+
+  labs( title = "Best Actress Winning Probability.",
+        x="Name",
+        y="Probability of Oscar Win",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+```{r}
+ggplot(actress.data, aes(x = name, y = sentiment_score)) +
+  geom_bar(stat="identity", color = "purple", fill = "yellow") +
+  geom_text(aes(label=sentiment_score), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0,0.6))+
+  labs( title = "Best Actress Sentiment Score",
+        x="Name",
+        y="Sentiment Score",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+
+
+```{r}
+ggplot(supporting_actress.data, aes(x = name, y=oscar_win)) +
+  geom_bar(stat="identity", color = "purple", fill = "grey", show.values=TRUE) +
+  geom_text(aes(label=oscar_win), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0.5,1))+
+  labs( title = "Best Supporting Actress Winning Probability",
+        x="Name",
+        y="Probability of Oscar Win",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+```{r}
+ggplot(supporting_actress.data, aes(x = name, y = sentiment_score)) +
+  geom_bar(stat="identity", color = "purple", fill = "grey") +
+  geom_text(aes(label=sentiment_score), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0,0.6))+
+  labs( title = "Best Supporting Actress Sentiment Score",
+        x="Name",
+        y="Sentiment Score",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+
+```{r}
+ggplot(movie.data, aes(x = name, y=oscar_win)) +
+  theme(axis.text.x = element_text(angle = 60, hjust=1))+
+  geom_bar(stat="identity", color = "purple", fill = "blue4", show.values=TRUE) +
+  geom_text(aes(label=oscar_win), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  theme(axis.text=element_text(size=10)) +
+  coord_cartesian(ylim=c(0.6,1))+
+  labs( title = "Best Movie Winning Probability.",
+        x="Name",
+        y="Probability of Oscar Win",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
+```{r}
+ggplot(movie.data, aes(x = name, y = sentiment_score)) +
+  theme(axis.text.x = element_text(angle = 60, hjust=1))+
+  geom_bar(stat="identity", color = "purple", fill = "blue4") +
+  geom_text(aes(label=sentiment_score), vjust=-0.3, size=3.5)+
+  geom_smooth(color = "pink", se = FALSE, method = "lm") +
+  coord_cartesian(ylim=c(0,0.8))+
+  labs( title = "Best Movie Sentiment Score",
+        x="Name",
+        y="Sentiment Score",
+        caption = "Source: Tweets Data"
+  ) 
+```
+
